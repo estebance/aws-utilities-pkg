@@ -1,0 +1,19 @@
+{
+  "name": "aws-utilities-pkg",
+  "version": "1.0.0",
+  "description": "a set of utilities to invoke and manage aws services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "aws",
+    "package",
+    "utilities"
+  ],
+  "author": "restebance@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1153.0"
+  }
+}
