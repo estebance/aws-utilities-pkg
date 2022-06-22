@@ -1,3 +1,9 @@
+let operationTypes = {
+  SCAN: 0, 
+  PUT: 1, 
+  GET: 2, 
+  UPDATE: 3
+};
 
 let putDynamodbItem = (dynamoDb, params) => {
     return new Promise((resolve, reject) => {
@@ -54,16 +60,21 @@ let updateDynamodbItem = (dynamoDb, updateParams) => {
 let executeDynamodbOperation = async (awsConfig, operation, params) => {
   try {
     const dynamoDb = new awsConfig.DynamoDB.DocumentClient();
+    console.log(operation);
     let operationResponse = null; 
     switch (operation) {
-      case 'put':
-       operationResponse = await putDynamodbItem(dynamoDb, params);
-      case 'get': 
-       operationResponse = await getDynamodbItem(dynamoDb, params);
-      case 'scan': 
+      case operationTypes.PUT:
+        operationResponse = await putDynamodbItem(dynamoDb, params);
+        break;
+      case operationTypes.GET: 
+        operationResponse = await getDynamodbItem(dynamoDb, params);
+        break;
+      case operationTypes.SCAN: 
         operationResponse = await scanDynamodbTable(dynamoDb, params); 
-      case 'update': 
+        break;
+      case operationTypes.UPDATE: 
         operationResponse = await updateDynamodbItem(dynamoDb, params); 
+        break;
       default: 
         throw new Error('Invalid operation provided, allowed values are put, get, scan or update');
     };
@@ -75,6 +86,7 @@ let executeDynamodbOperation = async (awsConfig, operation, params) => {
 
 
 module.exports = {
-  executeDynamodbOperation;
+  executeDynamodbOperation, 
+  operationTypes
 };
 

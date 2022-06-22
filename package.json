@@ -1,6 +1,6 @@
 {
   "name": "aws-utilities-pkg",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "a set of utilities to invoke and manage aws services",
   "main": "index.js",
   "scripts": {

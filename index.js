@@ -1,17 +1,20 @@
 const AWS = require('aws-sdk');
-const { executeDynamodbOperation } = require("./functions/dynamodb_manager");
+const { executeDynamodbOperation, operationTypes } = require("./functions/dynamodb_manager");
 
-let AwsUtilitiesPkg = (awsRegion) => {  
-  this.awsConfig = AWS.config.update({region: awsRegion });
+function AwsUtilitiesPkg(awsRegion = 'us-east-1'){  
+  this.awsRegion = awsRegion;
+  AWS.config.update({ region: this.awsRegion });  
 };
 
-AwsUtilitiesPkg.prototype.executeDynamodbTransaction = async (operation, params) => {
+AwsUtilitiesPkg.prototype.executeDynamodbTransaction = async function (operation, params){
   try {
-    const operationResponse =  await executeDynamodbOperation(this.awsConfig, operation, params);
+    const operationResponse =  await executeDynamodbOperation(AWS, operation, params);
     return operationResponse; 
   } catch (error) {
     throw error; 
   }
 };
 
-module.exports = AwsUtilitiesPkg;
+AwsUtilitiesPkg.prototype.dynamodbOperationTypes = operationTypes;
+
+module.exports = {AwsUtilitiesPkg};
