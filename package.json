@@ -2,6 +2,7 @@
   "name": "aws-utilities-pkg",
   "version": "1.0.3",
   "description": "a set of utilities to invoke and manage aws services",
+  "repository": "git@github.com:estebance/aws-utilities-pkg.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
