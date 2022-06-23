@@ -12,6 +12,36 @@
 
 Utilities to execute operations on AWS Services like DynamoDB
 
+# DynamoDB 
+
+The module allows to pick and operation and execute it quickly 
+
+1. Select your aws region
+    ```
+      const {AwsUtilitiesPkg} = require('aws-utilities-pkg');
+      const awsUtilsPkg =  new AwsUtilitiesPkg('us-east-1');
+    ```
+
+2. Pick the operation you want to execute 
+    ```
+        const  dynamodbOperation = awsUtil.dynamodbOperationTypes.PUT;    
+    ```
+    Allowed values are: PUT, GET, UPDATE, SCAN
+
+3. execute the transaction 
+
+    ```
+        const params = {
+            TableName: tableName,
+            KeyConditionExpression: 'key = :key',
+            ExpressionAttributeValues: {
+                ':key': value
+            }
+        };
+      
+        let newRecord = await awsUtil.executeDynamodbTransaction(dynamodbOperation, params);
+    ```
+
 ### Built With
 
 * [Node.js](https://nodejs.dev/)
